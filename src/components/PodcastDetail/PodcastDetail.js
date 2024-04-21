@@ -49,7 +49,7 @@ export const PodcastDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {results.map((episode, index) => (
+            {results.slice(1).map((episode, index) => (
               <tr
                 key={index}
                 className="podcast-detail__episodes-row"
