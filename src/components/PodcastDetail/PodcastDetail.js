@@ -19,7 +19,6 @@ export const PodcastDetail = () => {
     }
   }, [dispatch, podcastId, state.podcasts]);
 
-
   const {
     detail: { results },
     summary,
@@ -27,6 +26,7 @@ export const PodcastDetail = () => {
   const podcast = results[0];
 
   if (!podcast) return <p>Podcast not found</p>;
+  if (state.loading) return;
 
   return (
     <div className="podcast-detail">
