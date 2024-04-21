@@ -21,7 +21,6 @@ export const PodcastList = () => {
       podcast.author.toLowerCase().includes(filter.toLowerCase())
   );
 
-  if (state.loading) return <p>Cargando...</p>;
   if (state.error) return <p>Error: {state.error}</p>;
 
   return (
