@@ -1,8 +1,10 @@
 import React from "react";
 import { Routes, Route, useParams } from "react-router-dom";
-import { PodcastList } from "@components/PodcastList";
-import { PodcastDetail } from "@components/PodcastDetail";
-import { PodcastEpisode } from "@components/PodcastEpisode";
+import {
+  PodcastList,
+  PodcastDetail,
+  PodcastEpisode,
+} from "@components";
 
 const RoutesComponent = () => {
   const { id } = useParams();

@@ -2,11 +2,12 @@ import React, { useContext, useEffect } from "react";
 import { PodcastContext } from "@context/PodcastContext";
 import { fetchPodcastDetail } from "@actions/podcastActions";
 import { useParams } from "react-router-dom";
+import { usePodcastNavigation } from "@hooks";
 
 export const PodcastDetail = () => {
   const { podcastId } = useParams();
   const { state, dispatch } = useContext(PodcastContext);
-  console.log("state: ", state);
+  const { toEpisodeDetail } = usePodcastNavigation();
 
   useEffect(() => {
     if (
@@ -17,10 +18,8 @@ export const PodcastDetail = () => {
     }
   }, [dispatch, podcastId, state.podcasts]);
 
-  if (state.loading) return <p>Cargando detalles del podcast...</p>;
-  if (state.error)
-    return <p>Error al buscar detalles del podcast: {state.error}</p>;
-  if (!state.selectedPodcast) return <p>No se encontró el podcast.</p>;
+  if (state.loading) return <p>Loading podcast details...</p>;
+  if (state.error) return <p>No details: {state.error}</p>;
 
   const {
     detail: { results },
@@ -62,7 +61,11 @@ export const PodcastDetail = () => {
           </thead>
           <tbody>
             {results.map((episode, index) => (
-              <tr key={index} className="podcast-detail__episodes-row">
+              <tr
+                key={index}
+                className="podcast-detail__episodes-row"
+                onClick={() => toEpisodeDetail(podcastId, episode.trackId)}
+              >
                 <td className="podcast-detail__episodes-title">
                   {episode.trackName}
                 </td>

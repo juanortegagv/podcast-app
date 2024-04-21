@@ -25,15 +25,3 @@ export const fetchPodcastDetail = async (podcastId) => {
     throw error;
   }
 };
-
-export const fetchEpisodeDetail = async (episodeId) => {
-  try {
-    const url = encodeURIComponent(
-      `https://itunes.apple.com/lookup?id=${episodeId}&entity=podcastEpisode&limit=1`
-    );
-    return await axios.get(`${CORS_PROXY}${url}`);
-  } catch (error) {
-    console.error("Error fetching episode details:", error);
-    throw error;
-  }
-};

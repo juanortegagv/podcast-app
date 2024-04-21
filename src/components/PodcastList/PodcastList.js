@@ -1,18 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { PodcastContext } from "@context/PodcastContext";
 import { fetchPodcasts } from "@actions/podcastActions";
-import { useNavigate } from "react-router-dom";
+import { usePodcastNavigation } from "@hooks";
 
 export const PodcastList = () => {
   const [filter, setFilter] = useState("");
   const { state, dispatch } = useContext(PodcastContext);
-  console.log('state: ', state);
 
-  const navigate = useNavigate();
-  const navigateToPodcast = (podcast) => {
-    dispatch({ type: "SET_SELECTED_PODCAST", payload: podcast });
-    navigate(`/podcast/${podcast.id}`);
-  };
+  const { toPodcastDetail } = usePodcastNavigation();
 
   useEffect(() => {
     if (!state.loaded && !state.loading) {
@@ -45,7 +40,7 @@ export const PodcastList = () => {
           <div
             key={podcast.id}
             className="podcast-list__card"
-            onClick={() => navigateToPodcast(podcast)}
+            onClick={() => toPodcastDetail(podcast.id)}
           >
             <img
               src={podcast.image}
