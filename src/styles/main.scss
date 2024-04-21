@@ -13,6 +13,9 @@ body {
   -moz-box-shadow: 0px 1px #009bcd;
   box-shadow: 0px 1px #009bcd;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+
   p {
     padding-bottom: 7px;
     font-weight: bold;
@@ -23,10 +26,33 @@ body {
     width: fit-content;
   }
 }
+
+//card
 .generic_card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 2%;
 }
+
+//loading
+.loading-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #009bcd;
+  animation: glowing 1.5s infinite alternate;
+}
+
+@keyframes glowing {
+  from {
+    box-shadow: 0 0 5px #009bcd;
+    transform: scale(1);
+  }
+  to {
+    box-shadow: 0 0 20px #009bcd;
+    transform: scale(1.5);
+  }
+}
+
 //podcast
 .podcast-list {
   &__grid {
@@ -227,6 +253,9 @@ body {
         color: #009bcd;
         cursor: pointer;
       }
+    }
+    p {
+      text-align: justify;
     }
   }
 }

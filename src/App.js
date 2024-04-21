@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { PodcastProvider } from "./context/PodcastContext";
-import { Headers } from "./components/common";
+import { PodcastProvider } from "@context/PodcastContext";
+import { Headers } from "@components/common";
 import "./styles/main.scss";
 import Routes from "./routes";
 

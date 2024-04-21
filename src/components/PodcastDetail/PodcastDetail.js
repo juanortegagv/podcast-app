@@ -3,6 +3,7 @@ import { PodcastContext } from "@context/PodcastContext";
 import { fetchPodcastDetail } from "@actions/podcastActions";
 import { useParams } from "react-router-dom";
 import { usePodcastNavigation } from "@hooks";
+import { PodcastVisual } from "@components/common";
 
 export const PodcastDetail = () => {
   const { podcastId } = useParams();
@@ -18,8 +19,6 @@ export const PodcastDetail = () => {
     }
   }, [dispatch, podcastId, state.podcasts]);
 
-  if (state.loading) return <p>Loading podcast details...</p>;
-  if (state.error) return <p>No details: {state.error}</p>;
 
   const {
     detail: { results },
@@ -27,26 +26,16 @@ export const PodcastDetail = () => {
   } = state.selectedPodcast;
   const podcast = results[0];
 
+  if (!podcast) return <p>Podcast not found</p>;
+
   return (
     <div className="podcast-detail">
-      <div className="podcast-detail__visual generic_card">
-        <div className="podcast-detail__container-image">
-          <img
-            src={podcast.artworkUrl600}
-            alt={`Cover of ${podcast.collectionName}`}
-          />
-        </div>
-        <div className="podcast-detail__info">
-          <h1 className="podcast-detail__info-title">
-            {podcast.collectionName}
-          </h1>
-          <p className="podcast-detail__info-author">by {podcast.artistName}</p>
-          <p className="podcast-detail__info-description">
-            {" "}
-            Description: {summary}
-          </p>
-        </div>
-      </div>
+      <PodcastVisual
+        artworkUrl={podcast.artworkUrl600}
+        collectionName={podcast.collectionName}
+        artistName={podcast.artistName}
+        description={summary}
+      />
       <div className="podcast-detail__episodes">
         <h2 className="podcast-detail__episodes-count generic_card">
           Episodes: {podcast.trackCount}
